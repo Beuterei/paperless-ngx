@@ -20,6 +20,7 @@ services:
       VIRTUAL_PORT: 8000
       LETSENCRYPT_HOST: ${PAPERLESS_HOST:?Missing environment variable see readme}
       PAPERLESS_URL: https://${PAPERLESS_HOST:?Missing environment variable see readme}
+      PAPERLESS_SECRET_KEY: ${PAPERLESS_SECRET_KEY?Missing environment variable see readme}
 
     networks:
       - default

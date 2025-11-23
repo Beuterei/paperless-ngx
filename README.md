@@ -111,10 +111,11 @@ touch .env.production
 
 2. Overwrite variables as you like (format: `{variable name}={variable value}`)
 
-| Variable            | Description                                                                   | Default value | Required |
-| ------------------- | ----------------------------------------------------------------------------- | ------------- | -------- |
-| `POSTGRES_PASSWORD` | Password for the PostgreSQL database                                          | none          | true     |
-| `PAPERLESS_HOST`    | Hostname/domain for your paperless-ngx instance (used for SSL and URL config) | none          | true     |
+| Variable               | Description                                                                   | Default value | Required |
+| ---------------------- | ----------------------------------------------------------------------------- | ------------- | -------- |
+| `POSTGRES_PASSWORD`    | Password for the PostgreSQL database                                          | none          | true     |
+| `PAPERLESS_HOST`       | Hostname/domain for your paperless-ngx instance (used for SSL and URL config) | none          | true     |
+| `PAPERLESS_SECRET_KEY` | Secret key for the paperless-ngx instance                                     | none          | true     |
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
