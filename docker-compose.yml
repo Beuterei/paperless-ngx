@@ -1,0 +1,65 @@
+version: "3.8"
+services:
+  postgres:
+    image: postgres:18.1-alpine
+    restart: unless-stopped
+    ports:
+      - 5432
+
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD?Missing environment variable see readme}
+      POSTGRES_USER: paperless
+      POSTGRES_DB: paperless
+
+    volumes:
+      - paperlessPostgressData:/var/lib/postgresql
+
+  redis:
+    image: redis:8.0-alpine
+    restart: unless-stopped
+    ports:
+      - 6379
+
+  gotenberg:
+    image: gotenberg/gotenberg:8.24
+    restart: unless-stopped
+    command:
+      - "gotenberg"
+      - "--chromium-disable-javascript=true"
+      - "--chromium-allow-list=file:///tmp/.*"
+
+  tika:
+    image: apache/tika:3.2.3.0
+    restart: unless-stopped
+
+  paperless:
+    image: paperlessngx/paperless-ngx:2.19
+    restart: unless-stopped
+
+    ports:
+      - 8000
+
+    environment:
+      PAPERLESS_REDIS: redis://redis:6379
+      PAPERLESS_DBHOST: postgres
+      PAPERLESS_DBNAME: paperless
+      PAPERLESS_DBUSER: paperless
+      PAPERLESS_DBPASS: ${POSTGRES_PASSWORD?Missing environment variable see readme}
+      PAPERLESS_OCR_LANGUAGE: deu+eng
+      PAPERLESS_CONSUMER_DISABLE: "true"
+      PAPERLESS_TIKA_ENABLED: 1
+      PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://gotenberg:3000
+      PAPERLESS_TIKA_ENDPOINT: http://tika:9998
+
+    volumes:
+      - paperlessData:/usr/src/paperless/data
+      - paperlessMedia:/usr/src/paperless/media
+
+    depends_on:
+      - postgres
+      - redis
+
+volumes:
+  paperlessData:
+  paperlessMedia:
+  paperlessPostgressData:

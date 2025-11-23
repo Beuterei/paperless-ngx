@@ -1,0 +1,34 @@
+version: "3.8"
+services:
+  postgres:
+    container_name: paperlessPostgresDev
+
+    environment:
+      FORCE_COLOR: 1
+
+  redis:
+    container_name: paperlessRedisDev
+
+    environment:
+      FORCE_COLOR: 1
+
+  gotenberg:
+    container_name: paperlessGotenbergDev
+
+    environment:
+      FORCE_COLOR: 1
+
+  tika:
+    container_name: paperlessTikaDev
+
+    environment:
+      FORCE_COLOR: 1
+
+  paperless:
+    container_name: paperlessDev
+
+    environment:
+      FORCE_COLOR: 1
+
+    ports:
+      - 3500:8000

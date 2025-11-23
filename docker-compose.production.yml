@@ -1,0 +1,31 @@
+version: "3.8"
+services:
+  postgres:
+    container_name: paperlessPostgresProd
+
+  redis:
+    container_name: paperlessRedisProd
+
+  gotenberg:
+    container_name: paperlessGotenbergProd
+
+  tika:
+    container_name: paperlessTikaProd
+
+  paperless:
+    container_name: paperlessProd
+
+    environment:
+      VIRTUAL_HOST: ${PAPERLESS_HOST?Missing environment variable see readme}
+      VIRTUAL_PORT: 8000
+      LETSENCRYPT_HOST: ${PAPERLESS_HOST:?Missing environment variable see readme}
+      PAPERLESS_URL: https://${PAPERLESS_HOST:?Missing environment variable see readme}
+
+    networks:
+      - default
+      - nginxproxynet
+
+networks:
+  nginxproxynet:
+    name: nginxproxynet
+    external: true
