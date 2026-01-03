@@ -1,4 +1,3 @@
-version: "3.8"
 services:
   postgres:
     image: postgres:18.1-alpine
@@ -67,7 +66,7 @@ services:
     image: delfer/alpine-ftp-server
     restart: unless-stopped
     environment:
-      USERS: ${PAPERLESS_FTP_USER?Missing environment variable see readme}|${PAPERLESS_FTP_PASSWORD?Missing environment variable see readme}|1000|1000|/ftp/consume
+      USERS: ${PAPERLESS_FTP_USER?Missing environment variable see readme}|${PAPERLESS_FTP_PASSWORD?Missing environment variable see readme}|/ftp/consume|1000|1000
     volumes:
       - paperlessConsume:/ftp/consume
     ports:
