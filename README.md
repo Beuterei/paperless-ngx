@@ -67,9 +67,11 @@ touch .env
 
 2. Overwrite variables as you like (format: `{variable name}={variable value}`)
 
-| Variable            | Description                          | Default value | Required |
-| ------------------- | ------------------------------------ | ------------- | -------- |
-| `POSTGRES_PASSWORD` | Password for the PostgreSQL database | none          | true     |
+| Variable                    | Description                          | Default value | Required |
+| --------------------------- | ------------------------------------ | ------------- | -------- |
+| `POSTGRES_PASSWORD`         | Password for the PostgreSQL database | none          | true     |
+| `PAPERLESS_WEBDAV_USER`     | Username for WebDAV access           | none          | true     |
+| `PAPERLESS_WEBDAV_PASSWORD` | Password for WebDAV access           | none          | true     |
 
 ## Getting Started Production
 
@@ -111,15 +113,17 @@ touch .env.production
 
 2. Overwrite variables as you like (format: `{variable name}={variable value}`)
 
-| Variable                     | Description                                                                     | Default value     | Required |
-| ---------------------------- | ------------------------------------------------------------------------------- | ----------------- | -------- |
-| `POSTGRES_PASSWORD`          | Password for the PostgreSQL database                                            | none              | true     |
-| `PAPERLESS_HOST`             | Hostname/domain for your paperless-ngx instance (used for VIRTUAL_HOST and URL) | none              | true     |
-| `PAPERLESS_LETSENCRYPT_HOST` | Hostname/domain for Let's Encrypt                                               | ${PAPERLESS_HOST} | false    |
-| `PAPERLESS_FTP_USER`         | Username for the FTP user                                                       | none              | true     |
-| `ACME_CHALLENGE`             | ACME challenge type for Let's Encrypt                                           | http-01           | false    |
-| `PAPERLESS_FTP_PASSWORD`     | Password for the FTP user 'paperless'                                           | none              | true     |
-| `PAPERLESS_SECRET_KEY`       | Secret key for the paperless-ngx instance                                       | none              | true     |
+| Variable                            | Description                                                                     | Default value            | Required |
+| ----------------------------------- | ------------------------------------------------------------------------------- | ------------------------ | -------- |
+| `POSTGRES_PASSWORD`                 | Password for the PostgreSQL database                                            | none                     | true     |
+| `PAPERLESS_HOST`                    | Hostname/domain for your paperless-ngx instance (used for VIRTUAL_HOST and URL) | none                     | true     |
+| `PAPERLESS_LETSENCRYPT_HOST`        | Hostname/domain for Let's Encrypt                                               | ${PAPERLESS_HOST}        | false    |
+| `PAPERLESS_WEBDAV_HOST`             | Hostname/domain for WebDAV service                                              | none                     | true     |
+| `PAPERLESS_WEBDAV_LETSENCRYPT_HOST` | Hostname/domain for WebDAV Let's Encrypt                                        | ${PAPERLESS_WEBDAV_HOST} | false    |
+| `PAPERLESS_WEBDAV_USER`             | Username for WebDAV access                                                      | none                     | true     |
+| `PAPERLESS_WEBDAV_PASSWORD`         | Password for WebDAV access                                                      | none                     | true     |
+| `ACME_CHALLENGE`                    | ACME challenge type for Let's Encrypt                                           | HTTP-01                  | false    |
+| `PAPERLESS_SECRET_KEY`              | Secret key for the paperless-ngx instance                                       | none                     | true     |
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->

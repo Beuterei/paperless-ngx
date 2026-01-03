@@ -33,9 +33,11 @@ services:
     ports:
       - 3500:8000
 
-  ftp:
-    container_name: paperlessFtpDev
+  webdav:
+    container_name: paperlessWebdavDev
+    ports:
+      - 3600:80
 
     environment:
-      USERS: paperless|paperless|1000|1000|/ftp/consume
       FORCE_COLOR: 1
+      AUTH_TYPE: Digest

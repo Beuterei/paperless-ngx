@@ -61,16 +61,15 @@ services:
       - postgres
       - redis
 
-  ftp:
-    image: delfer/alpine-ftp-server
+  webdav:
+    image: bytemark/webdav:2.4
     restart: unless-stopped
     environment:
-      USERS: ${PAPERLESS_FTP_USER?Missing environment variable see readme}|${PAPERLESS_FTP_PASSWORD?Missing environment variable see readme}|/ftp/consume|1000|1000
+      AUTH_TYPE: Basic
+      USERNAME: ${PAPERLESS_WEBDAV_USER?Missing environment variable}
+      PASSWORD: ${PAPERLESS_WEBDAV_PASSWORD?Missing environment variable}
     volumes:
-      - paperlessConsume:/ftp/consume
-    ports:
-      - 21:21
-      - 21000-21010:21000-21010
+      - paperlessConsume:/var/lib/dav
 
 volumes:
   paperlessData:
