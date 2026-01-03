@@ -32,3 +32,10 @@ services:
 
     ports:
       - 3500:8000
+
+  ftp:
+    container_name: paperlessFtpDev
+
+    environment:
+      USERS: paperless|paperless|1000|1000|/ftp/consume
+      FORCE_COLOR: 1

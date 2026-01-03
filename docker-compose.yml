@@ -57,12 +57,25 @@ services:
     volumes:
       - paperlessData:/usr/src/paperless/data
       - paperlessMedia:/usr/src/paperless/media
+      - paperlessConsume:/usr/src/paperless/consume
 
     depends_on:
       - postgres
       - redis
 
+  ftp:
+    image: delfer/alpine-ftp-server
+    restart: unless-stopped
+    environment:
+      USERS: ${PAPERLESS_FTP_USER}|${PAPERLESS_FTP_PASSWORD}|1000|1000|/ftp/consume
+    volumes:
+      - paperlessConsume:/ftp/consume
+    ports:
+      - 21:21
+      - 21000-21010:21000-21010
+
 volumes:
   paperlessData:
   paperlessMedia:
   paperlessPostgressData:
+  paperlessConsume:

@@ -18,13 +18,18 @@ services:
     environment:
       VIRTUAL_HOST: ${PAPERLESS_HOST?Missing environment variable see readme}
       VIRTUAL_PORT: 8000
-      LETSENCRYPT_HOST: ${PAPERLESS_HOST:?Missing environment variable see readme}
+      LETSENCRYPT_HOST: ${PAPERLESS_LETSENCRYPT_HOST:-${PAPERLESS_HOST}}
       PAPERLESS_URL: https://${PAPERLESS_HOST:?Missing environment variable see readme}
       PAPERLESS_SECRET_KEY: ${PAPERLESS_SECRET_KEY?Missing environment variable see readme}
 
     networks:
       - default
       - nginxproxynet
+
+  ftp:
+    container_name: paperlessFtpProd
+    environment:
+      ADDRESS: ${PAPERLESS_HOST}
 
 networks:
   nginxproxynet:
