@@ -55,7 +55,13 @@ git clone https://github.com/Beuterei/paperless-ngx.git
 docker-compose up --build
 ```
 
-3. Navigate to `localhost:3500`
+3. Set permissions for WebDAV
+
+```sh
+docker exec $(docker-compose ps -q webdav) chmod -R 777 /var/lib/dav
+```
+
+4. Navigate to `localhost:3500`
 
 ### Customization
 
@@ -101,6 +107,12 @@ touch .env.production
 
 ```sh
 docker-compose --env-file ./.env.production -f docker-compose.yml -f docker-compose.production.yml up -d
+```
+
+5. Set permissions for WebDAV
+
+```sh
+docker exec paperlessWebdavProd chmod -R 777 /var/lib/dav
 ```
 
 ### Customization
