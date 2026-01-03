@@ -69,12 +69,21 @@ services:
       USERNAME: ${PAPERLESS_WEBDAV_USER?Missing environment variable}
       PASSWORD: ${PAPERLESS_WEBDAV_PASSWORD?Missing environment variable}
     volumes:
-      - paperlessWebdavData:/var/lib/dav
+      - paperlessWebdavLocks:/var/lib/dav
       - paperlessConsume:/var/lib/dav/data
+    depends_on:
+      fix-permissions:
+        condition: service_completed_successfully
+
+  fix-permissions:
+    image: alpine:latest
+    command: sh -c "chmod -R 777 /data"
+    volumes:
+      - paperlessConsume:/data
 
 volumes:
   paperlessData:
   paperlessMedia:
   paperlessPostgressData:
   paperlessConsume:
-  paperlessWebdavData:
+  paperlessWebdavLocks:
