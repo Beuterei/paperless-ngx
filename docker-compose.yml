@@ -51,6 +51,7 @@ services:
       PAPERLESS_FILENAME_FORMAT: "{{ owner_username }}/{{ created_year }}/{{ created_month }}/{{ correspondent }}/{{ asn }} - {{ title }}"
       PAPERLESS_CONSUMER_ENABLE_BARCODES: 1
       PAPERLESS_CONSUMER_ENABLE_ASN_BARCODE: 1
+      PAPERLESS_CONSUMER_INOTIFY_DELAY: 5
 
     volumes:
       - paperlessData:/usr/src/paperless/data
