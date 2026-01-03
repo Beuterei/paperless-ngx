@@ -45,7 +45,6 @@ services:
       PAPERLESS_DBUSER: paperless
       PAPERLESS_DBPASS: ${POSTGRES_PASSWORD?Missing environment variable see readme}
       PAPERLESS_OCR_LANGUAGE: deu+eng
-      PAPERLESS_CONSUMER_DISABLE: 1
       PAPERLESS_TIKA_ENABLED: 1
       PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://gotenberg:3000
       PAPERLESS_TIKA_ENDPOINT: http://tika:9998
