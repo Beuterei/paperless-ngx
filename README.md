@@ -116,7 +116,8 @@ touch .env.production
 | `POSTGRES_PASSWORD`          | Password for the PostgreSQL database                                            | none              | true     |
 | `PAPERLESS_HOST`             | Hostname/domain for your paperless-ngx instance (used for VIRTUAL_HOST and URL) | none              | true     |
 | `PAPERLESS_LETSENCRYPT_HOST` | Hostname/domain for Let's Encrypt                                               | ${PAPERLESS_HOST} | false    |
-| `PAPERLESS_FTP_USER`         | Username for the FTP user 'paperless'                                           | none              | true     |
+| `PAPERLESS_FTP_USER`         | Username for the FTP user                                                       | none              | true     |
+| `ACME_CHALLENGE`             | ACME challenge type for Let's Encrypt                                           | http-01           | false    |
 | `PAPERLESS_FTP_PASSWORD`     | Password for the FTP user 'paperless'                                           | none              | true     |
 | `PAPERLESS_SECRET_KEY`       | Secret key for the paperless-ngx instance                                       | none              | true     |
 
