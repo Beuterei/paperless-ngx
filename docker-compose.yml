@@ -69,10 +69,12 @@ services:
       USERNAME: ${PAPERLESS_WEBDAV_USER?Missing environment variable}
       PASSWORD: ${PAPERLESS_WEBDAV_PASSWORD?Missing environment variable}
     volumes:
-      - paperlessConsume:/var/lib/dav
+      - paperlessWebdavData:/var/lib/dav
+      - paperlessConsume:/var/lib/dav/data
 
 volumes:
   paperlessData:
   paperlessMedia:
   paperlessPostgressData:
   paperlessConsume:
+  paperlessWebdavData:
