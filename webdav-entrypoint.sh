@@ -1,7 +1,6 @@
 #!/bin/sh
+set -e
 
-# Set permissions for WebDAV data directory
-chmod -R 775 /var/lib/dav/data 2>/dev/null || true
+chmod -R 775 /var/lib/dav/data
 
-# Execute the original entrypoint
-exec /usr/local/bin/docker-entrypoint.sh "$@"
+exec /usr/local/bin/docker-entrypoint.sh httpd-foreground
