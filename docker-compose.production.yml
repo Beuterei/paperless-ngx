@@ -28,10 +28,13 @@ services:
 
   webdav:
     container_name: paperlessWebdavProd
+
     environment:
       VIRTUAL_HOST: ${PAPERLESS_WEBDAV_HOST?Missing environment variable}
       VIRTUAL_PORT: 80
       LETSENCRYPT_HOST: ${PAPERLESS_WEBDAV_LETSENCRYPT_HOST-${PAPERLESS_WEBDAV_HOST}}
+      SERVER_NAMES: ${PAPERLESS_WEBDAV_HOST?Missing environment variable}
+
     networks:
       - default
       - nginxproxynet

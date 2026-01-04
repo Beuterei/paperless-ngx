@@ -65,7 +65,7 @@ services:
   webdav:
     image: bytemark/webdav:2.4
 
-    user: 1000:1000
+    entrypoint: ["/entrypoint.sh"]
 
     restart: unless-stopped
 
@@ -73,12 +73,11 @@ services:
       AUTH_TYPE: Basic
       USERNAME: ${PAPERLESS_WEBDAV_USER?Missing environment variable}
       PASSWORD: ${PAPERLESS_WEBDAV_PASSWORD?Missing environment variable}
-      UID: 1000
-      GID: 1000
 
     volumes:
       - paperlessWebdavLocks:/var/lib/dav
       - paperlessConsume:/var/lib/dav/data
+      - ./webdav-entrypoint.sh:/entrypoint.sh:ro
 
 volumes:
   paperlessData:
