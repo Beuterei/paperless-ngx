@@ -32,3 +32,12 @@ services:
 
     ports:
       - 3500:8000
+
+  webdav:
+    container_name: paperlessWebdavDev
+    ports:
+      - 3600:80
+
+    environment:
+      FORCE_COLOR: 1
+      AUTH_TYPE: Digest

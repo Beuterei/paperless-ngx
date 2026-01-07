@@ -1,4 +1,3 @@
-version: "3.8"
 services:
   postgres:
     image: postgres:18.1-alpine
@@ -46,23 +45,43 @@ services:
       PAPERLESS_DBUSER: paperless
       PAPERLESS_DBPASS: ${POSTGRES_PASSWORD?Missing environment variable see readme}
       PAPERLESS_OCR_LANGUAGE: deu+eng
-      PAPERLESS_CONSUMER_DISABLE: 1
       PAPERLESS_TIKA_ENABLED: 1
       PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://gotenberg:3000
       PAPERLESS_TIKA_ENDPOINT: http://tika:9998
       PAPERLESS_FILENAME_FORMAT: "{{ owner_username }}/{{ created_year }}/{{ created_month }}/{{ correspondent }}/{{ asn }} - {{ title }}"
       PAPERLESS_CONSUMER_ENABLE_BARCODES: 1
       PAPERLESS_CONSUMER_ENABLE_ASN_BARCODE: 1
+      PAPERLESS_CONSUMER_INOTIFY_DELAY: 5
 
     volumes:
       - paperlessData:/usr/src/paperless/data
       - paperlessMedia:/usr/src/paperless/media
+      - paperlessConsume:/usr/src/paperless/consume
 
     depends_on:
       - postgres
       - redis
 
+  webdav:
+    image: bytemark/webdav:2.4
+
+    entrypoint: ["/entrypoint.sh"]
+
+    restart: unless-stopped
+
+    environment:
+      AUTH_TYPE: Basic
+      USERNAME: ${PAPERLESS_WEBDAV_USER?Missing environment variable}
+      PASSWORD: ${PAPERLESS_WEBDAV_PASSWORD?Missing environment variable}
+
+    volumes:
+      - paperlessWebdavLocks:/var/lib/dav
+      - paperlessConsume:/var/lib/dav/data
+      - ./webdav-entrypoint.sh:/entrypoint.sh:ro
+
 volumes:
   paperlessData:
   paperlessMedia:
   paperlessPostgressData:
+  paperlessConsume:
+  paperlessWebdavLocks:
